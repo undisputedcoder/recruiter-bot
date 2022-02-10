@@ -2,6 +2,8 @@ import hikari
 import lightbulb
 import requests
 from bs4 import BeautifulSoup
+from dotenv import load_dotenv
+import os
 
 class Job:
     def __init__(self, title, company, location, salary, description):
@@ -13,7 +15,9 @@ class Job:
 
 jobs = []
 
-bot = lightbulb.BotApp(token = 'NzIzODQwMTI3MjE4MDkwMDE0.Xu3epg.ZrbfGgRWWUvAM5zRVu8GkvqxR-g', default_enabled_guilds=(822134565639815210))
+load_dotenv()
+
+bot = lightbulb.BotApp(token=os.getenv('TOKEN'), default_enabled_guilds=(822134565639815210))
 
 response = requests.get('https://au.indeed.com/jobs?q=software+engineer&l=Perth+WA&radius=50&fromage=1')
 soup = BeautifulSoup(response.content, 'html.parser')
